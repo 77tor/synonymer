@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synonym-verksted</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-standard">
+
+<div class="sidebar">
+    <div class="sidebar-header" style="display: flex; align-items: center; margin-bottom: 20px;">
+        <div class="menu-container" style="margin-bottom: 0; margin-right: 15px;">
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
+            <div id="myDropdown" class="dropdown-menu">
+                <a href="https://77tor.github.io/bingo/" target="_self">
+                    <img src="bingo_02.png" class="menu-icon" alt="Bingo"> Bingo
+                </a>
+                <a href="https://77tor.github.io/finn_ordet/" target="_self">
+                    <img src="finn_ordet_01.svg" class="menu-icon" alt="Finn ordet"> Finn ordet
+                </a>
+                <a href="https://77tor.github.io/gitter/" target="_self">
+                    <img src="gitter_02.png" class="menu-icon" alt="Gitter-ord"> Gitter-ord
+                </a>
+                <a href="https://77tor.github.io/les_og_skriv/" target="_self">
+                    <img src="les_skriv.png" class="menu-icon" alt="Les og skriv"> Les og skriv
+                </a>
+                <a href="https://77tor.github.io/ord-sok/" target="_self"> 
+                    <img src="ord-sok.png" class="menu-icon" alt="Ordsøk"> Ordsøk
+                </a>
+                <a href="https://77tor.github.io/puslehistorier/" target="_self">
+                    <img src="pusle_02.png" class="menu-icon" alt="Puslehistorier"> Puslehistorier
+                </a>
+                <a href="https://77tor.github.io/Silhuettord/" target="_self">
+                    <img src="silhuett-ord_05.png" class="menu-icon" alt="Silhuett-ord"> Silhuett-ord
+                </a>
+                <a href="https://77tor.github.io/Stavelser/" target="_self">
+                    <img src="stavelser_01.png" class="menu-icon" alt="Stavelser"> Stavelser
+                </a>
+                <a href="https://77tor.github.io/Synonymer/" target="_self">
+                    <img src="synonym.png" class="menu-icon" alt="Synonymer"> Synonymer
+                </a>
+            </div>
+        </div>
+        <h2 style="margin: 0; flex-grow: 1; text-align: center;">SYNONYM-VERKSTED</h2>
+    </div>
+
+    <div class="control-item">
+        <span>Overskrift:</span>
+        <input type="text" id="custom-title" value="Jobb med synonymer" oninput="oppdaterVisning()">
+    </div>
+
+<div class="control-item">
+    <span>Modus:</span>
+    <select id="select-modus" onchange="justerMaksAntall(); genererOppgaver();">
+        <option value="ord">Enkelte ord</option>
+        <option value="setninger">Setninger</option>
+        <option value="miks" selected>Blandet</option>
+    </select>
+</div>
+
+    <div class="control-item">
+        <span>Antall oppgaver:</span>
+        <input type="number" id="antall-oppgaver" value="10" min="1" max="30" onchange="genererOppgaver()">
+    </div>
+
+    <div class="control-item">
+        <span>Font:</span>
+     <select id="font-family" onchange="oppdaterVisning();">
+        <option value="Arial, sans-serif" selected>Standard (Arial)</option>
+        <option value="'Trykkskrift', sans-serif">Trykkskrift</option>
+        <option value="'Stavskrift', cursive">Stavskrift</option>
+        <option value="'Andika', sans-serif">Andika</option>
+        <option value="'Comic Sans MS', 'Chalkboard SE', cursive">Comic Sans</option>
+        <option value="Verdana, sans-serif">Verdana (Aktiv lesbarhet)</option>
+        <option value="'Times New Roman', serif">Serif (Klassisk)</option>
+    </select>
+    </div>
+
+    <!-- Temavelger -->
+    <div class="control-item">
+        <span>Velg tema:</span>
+        <select id="themeSelect" onchange="changeTheme(this.value)">
+            <option value="standard">Standard</option>
+            <option value="dinosaur">Dinosaurer</option>
+            <option value="eurovisjon">Eurovisjon</option>
+            <option value="fest">Fest</option>
+            <option value="halloween">Halloween</option>
+            <option value="host">Høst</option>
+            <option value="jul">Jul</option>
+            <option value="kryp">Småkryp</option>
+            <option value="naturfag">Naturfag</option>
+            <option value="racerbil">Racerbil</option>
+            <option value="sjorover">Sjørøver</option>
+            <option value="sommer">Sommer</option>
+            <option value="sommerfugl">Sommerfugl</option>
+            <option value="sport">Sport</option>
+            <option value="verdensrommet">Verdensrommet</option>
+            <option value="vinter">Vinter</option>
+        </select>
+    </div>
+
+<!-- STORE BOKSTAVER -->
+    <div class="control-item">
+        <span>STORE BOKSTAVER</span>
+        <label class="switch">
+            <input type="checkbox" id="toggle-upper" onchange="tegnOppgaver()">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <!-- VIS FASIT (Ny slide-bryter) -->
+    <div class="control-item">
+        <span style="color: #f39c12; font-weight: bold;">Vis fasit</span>
+        <label class="switch">
+            <input type="checkbox" id="toggle-fasit" onchange="toggleFasitVisning()">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <!-- Knapper (Rett oppgaver-knappen er fjernet) -->
+<div class="knappe-rad" style="display: flex; gap: 6px; margin-top: 15px; width: 100%;">
+    <button class="action-btn" style="flex: 2; background-color: var(--accent-green); padding: 10px 4px; font-size: 0.82rem;" onclick="genererOppgaver()">Nye oppgaver</button>
+    <button class="action-btn" style="flex: 1; background-color: #e74c3c; padding: 10px 4px; font-size: 0.82rem;" onclick="nullstillValg()">Nullstill</button>
+    <button class="action-btn" style="flex: 1; background-color: #2980b9; padding: 10px 4px; font-size: 0.82rem;" onclick="window.print()">Skriv ut</button>
+</div>
+</div>
+
+<div class="main-content">
+    <!-- START-SKJERM (Plassholderbilde som vises ved oppstart) -->
+    <div id="placeholder-image" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
+        <img src="synonym.png" alt="Velkomstbilde" style="max-width: 400px; opacity: 0.3; filter: grayscale(100%);">
+    </div>
+
+    <!-- OPPGAVEARK (Skjult ved oppstart) -->
+    <div id="oppgave-ark" style="display: none;">
+        <div class="ark-header">
+            <img id="ark-bilde-1" class="corner-img" src="" alt="">
+            <div class="ark-tittel">
+                <h1 id="ark-overskrift">Jobb med synonymer</h1>
+                <div class="navn-dato-linje">
+                    <span>Navn: ____________________</span>
+                    <span>Dato: ____________</span>
+                </div>
+            </div>
+            <img id="ark-bilde-2" class="corner-img" src="" alt="">
+        </div>
+
+        <div id="oppgaver-container"></div>
+
+        <div class="ark-footer">
+            <img id="ark-bilde-3" class="corner-img" src="" alt="">
+        </div>
+    </div>
+</div>
+
+<script src="synonym.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
