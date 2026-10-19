@@ -157,6 +157,157 @@ select:focus, input:focus { outline: none; }
 .synonym-knapp.korrekt { background: #27ae60 !important; color: white; }
 .synonym-knapp.feil { background: #e74c3c !important; color: white; }
 
+/* MODAL POPUP */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-innhold {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    color: #2c3e50;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 10px;
+}
+
+.modal-header h2 { margin: 0; font-size: 1.2rem; }
+.modal-lukk { font-size: 1.8rem; cursor: pointer; font-weight: bold; color: #7f8c8d; }
+.modal-lukk:hover { color: #e74c3c; }
+
+.modal-fane-valg {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0 10px 0;
+}
+
+.fane-btn {
+    flex: 1;
+    padding: 8px;
+    border: 2px solid #bdc3c7;
+    background: #ecf0f1;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.fane-btn.aktiv {
+    background: var(--theme-accent, #2b6cb0);
+    color: white;
+    border-color: var(--theme-accent, #2b6cb0);
+}
+
+.modal-status-linje {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.btn-liten {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.modal-liste {
+    flex-grow: 1;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 350px;
+}
+
+.modal-rad {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-bottom: 1px solid #f1f2f6;
+    cursor: pointer;
+}
+
+.modal-rad:hover { background: #f8f9fa; }
+.modal-rad input[type="checkbox"] { transform: scale(1.2); cursor: pointer; }
+
+.modal-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 2px solid #ecf0f1;
+}
+.knapperad-full {
+    width: 100%;
+    margin-top: 8px;
+}
+/* Lilla knappestil som matcher de andre action-btn knappene */
+.action-btn.btn-lilla {
+    background-color: #8e44ad;
+    color: white;
+    width: 100%;
+    box-shadow: none; /* Fjerner egen skygge */
+    border: none;
+}
+
+.action-btn.btn-lilla:hover {
+    background-color: #732d91;
+}
+@media print {
+    .modal-overlay { display: none !important; }
+}
+
+/* SØKEFELT I MODAL */
+.modal-sok-container {
+    margin-bottom: 10px;
+}
+
+.modal-sok-container input[type="text"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+.modal-sok-container input[type="text"]:focus {
+    border-color: var(--theme-accent, #2b6cb0);
+    outline: none;
+}
+
+
 /* TEMASTILER */
 body.theme-standard { --theme-accent: #2b6cb0; } body.theme-standard .main-content { background-color: #d1d8e0; }
 body.theme-dinosaur { --theme-accent: #27ae60; } body.theme-dinosaur .main-content { background-color: #d4efdf; }

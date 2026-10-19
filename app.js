@@ -251,6 +251,137 @@ function oppdaterVisning() {
     }
 }
 
+
+let aktivModalFane = 'ord';
+let valgteOppgaverSet = new Set(); // Holder styr på valgte objekter (som JSON-strenger)
+
+// Åpne og lukke modal
+function apneVelgSelvModal() {
+    document.getElementById('velg-selv-modal').style.display = 'flex';
+    document.getElementById('modal-sok-input').value = '';
+    byttFane(aktivModalFane);
+}
+
+function lukkVelgSelvModal() {
+    document.getElementById('velg-selv-modal').style.display = 'none';
+}
+
+// Bytt mellom «Ord» og «Setninger»
+function byttFane(fane) {
+    aktivModalFane = fane;
+    document.getElementById('fane-ord-btn').classList.toggle('aktiv', fane === 'ord');
+    document.getElementById('fane-setninger-btn').classList.toggle('aktiv', fane === 'setninger');
+    document.getElementById('modal-sok-input').value = ''; // Tøm søk ved fanebytte
+    fyllModalListe();
+}
+
+// Filtrer listen dynamisk basert på søkeinnhold
+function filtrerModalListe() {
+    fyllModalListe();
+}
+
+// Bygg opp listen i modalen med korrekt nøkkel-støtte (tekst/maallord/ord)
+function fyllModalListe() {
+    const container = document.getElementById('modal-oppgave-liste');
+    container.innerHTML = '';
+
+    if (typeof synonymData === 'undefined') return;
+
+    const kilde = synonymData[aktivModalFane] || [];
+    const sokTekst = (document.getElementById('modal-sok-input')?.value || '').toLowerCase().trim();
+
+    kilde.forEach((item, index) => {
+        // Hent ut tekst for visning basert på datastruktur
+        let tekstiListe = '';
+        let sokegrunnlag = '';
+
+        if (aktivModalFane === 'ord') {
+            tekstiListe = item.ord || item.tekst || '';
+            sokegrunnlag = `${tekstiListe} ${item.fasit || ''} ${(item.alternativer || []).join(' ')}`.toLowerCase();
+        } else {
+            // For setninger: støtt både .tekst, .setning, .maallord og .fasit
+            tekstiListe = item.tekst || item.setning || '';
+            const maallord = item.maallord || '';
+            const fasit = item.fasit || '';
+            sokegrunnlag = `${tekstiListe} ${maallord} ${fasit} ${(item.alternativer || []).join(' ')}`.toLowerCase();
+        }
+
+        // Sjekk om elementet matcher søket
+        if (sokTekst !== '' && !sokegrunnlag.includes(sokTekst)) {
+            return; // Hopp over hvis det ikke matcher søk
+        }
+
+        const rad = document.createElement('label');
+        rad.className = 'modal-rad';
+
+        const uniktId = `cb-${aktivModalFane}-${index}`;
+        const itemString = JSON.stringify(item);
+        const isChecked = valgteOppgaverSet.has(itemString);
+
+        rad.innerHTML = `
+            <input type="checkbox" id="${uniktId}" ${isChecked ? 'checked' : ''}>
+            <span><strong>${index + 1}.</strong> ${tekstiListe}</span>
+        `;
+
+        const checkbox = rad.querySelector('input');
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                valgteOppgaverSet.add(itemString);
+            } else {
+                valgteOppgaverSet.delete(itemString);
+            }
+            oppdaterTeller();
+        });
+
+        container.appendChild(rad);
+    });
+
+    if (container.children.length === 0) {
+        container.innerHTML = '<div style="padding: 15px; text-align: center; color: #7f8c8d;">Ingen oppgaver matchet søket.</div>';
+    }
+
+    oppdaterTeller();
+}
+
+function oppdaterTeller() {
+    const teller = document.getElementById('antall-valgte-teller');
+    if (teller) teller.innerText = valgteOppgaverSet.size;
+}
+
+function nullstillValgteIModal() {
+    valgteOppgaverSet.clear();
+    fyllModalListe();
+}
+
+// Send de egendefinerte valgene til oppgavearket
+function brukEgendefinerteOppgaver() {
+    if (valgteOppgaverSet.size === 0) {
+        alert("Vennligst velg minst én oppgave fra listen.");
+        return;
+    }
+
+    // Vis selve oppgavearket og skjul startskjermen
+    const placeholder = document.getElementById('placeholder-image');
+    const ark = document.getElementById('oppgave-ark');
+    if (placeholder) placeholder.style.display = 'none';
+    if (ark) ark.style.display = 'flex';
+
+    // Konverter valgte objekter fra Set til matrise
+    gjeldendeOppgaver = Array.from(valgteOppgaverSet).map(item => JSON.parse(item));
+
+    // Oppdater antall-feltet i menyen til å matche antall valgte
+    const antallInput = document.getElementById('antall-oppgaver');
+    if (antallInput) {
+        antallInput.value = gjeldendeOppgaver.length;
+    }
+
+    tegnOppgaver();
+    oppdaterBildeSynlighet();
+    lukkVelgSelvModal();
+}
+
+
+
 // Nullstill til startskjerm
 function nullstillValg() {
     // Skjul oppgavearket og vis velkomstbildet
