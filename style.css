@@ -1,5 +1,5 @@
-@font-face { font-family: 'Stavskrift'; src: url('stavskrift.otf') format('opentype'); font-weight: normal; font-style: normal; }
-@font-face { font-family: 'Trykkskrift'; src: url('trykkskrift.otf') format('opentype'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'Stavskrift'; src: url('skrift/stavskrift.otf') format('opentype'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'Trykkskrift'; src: url('skrift/trykkskrift.otf') format('opentype'); font-weight: normal; font-style: normal; }
 @import url('https://fonts.googleapis.com/css2?family=Andika&display=swap');
 
 :root { 

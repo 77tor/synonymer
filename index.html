@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Synonymer</title>
-    <link rel="icon" type="image/png" href="synonym.png">
-    <link rel="apple-touch-icon" href="synonym.png">
+    <link rel="icon" type="image/png" href="ikon/synonym.png">
+    <link rel="apple-touch-icon" href="ikon/synonym.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="theme-standard">
@@ -17,32 +17,36 @@
                 <span></span><span></span><span></span>
             </div>
             <div id="myDropdown" class="dropdown-menu">
+                </a>
                 <a href="https://77tor.github.io/bingo/" target="_self">
-                    <img src="bingo_02.png" class="menu-icon" alt="Bingo"> Bingo
+                    <img src="ikon/bingo.png" class="menu-icon" alt="Bingo"> Bingo
                 </a>
                 <a href="https://77tor.github.io/finn_ordet/" target="_self">
-                    <img src="finn_ordet_01.svg" class="menu-icon" alt="Finn ordet"> Finn ordet
+                    <img src="ikon/finn_ordet.svg" class="menu-icon" alt="Finn ordet"> Finn ordet
                 </a>
                 <a href="https://77tor.github.io/gitter/" target="_self">
-                    <img src="gitter_02.png" class="menu-icon" alt="Gitter-ord"> Gitter-ord
+                    <img src="ikon/gitter.png" class="menu-icon" alt="Gitter-ord"> Gitter-ord
                 </a>
                 <a href="https://77tor.github.io/les_og_skriv/" target="_self">
-                    <img src="les_skriv.png" class="menu-icon" alt="Les og skriv"> Les og skriv
+                    <img src="ikon/les_skriv.png" class="menu-icon" alt="Les og skriv"> Les og skriv
+                </a>
+                <a href="https://77tor.github.io/ordkjeder/" target="_self">
+                    <img src="ikon/ordkjeder.png" class="menu-icon" alt="Ordkjeder"> Ordkjeder
                 </a>
                 <a href="https://77tor.github.io/ord-sok/" target="_self"> 
-                    <img src="ord-sok.png" class="menu-icon" alt="Ordsøk"> Ordsøk
+                    <img src="ikon/ord-sok.png" class="menu-icon" alt="Ordsøk"> Ordsøk
                 </a>
                 <a href="https://77tor.github.io/puslehistorier/" target="_self">
-                    <img src="pusle_02.png" class="menu-icon" alt="Puslehistorier"> Puslehistorier
+                    <img src="ikon/pusle.png" class="menu-icon" alt="Puslehistorier"> Puslehistorier
                 </a>
                 <a href="https://77tor.github.io/Silhuettord/" target="_self">
-                    <img src="silhuett-ord_05.png" class="menu-icon" alt="Silhuett-ord"> Silhuett-ord
+                    <img src="ikon/silhuett-ord.png" class="menu-icon" alt="Silhuett-ord"> Silhuett-ord
                 </a>
                 <a href="https://77tor.github.io/Stavelser/" target="_self">
-                    <img src="stavelser_01.png" class="menu-icon" alt="Stavelser"> Stavelser
+                    <img src="ikon/stavelser.png" class="menu-icon" alt="Stavelser"> Stavelser
                 </a>
                 <a href="https://77tor.github.io/synonymer/" class="menu-item-disabled">
-                    <img src="synonym.png" class="menu-icon" alt="Synonymer"> Synonymer
+                    <img src="ikon/synonym.png" class="menu-icon" alt="Synonymer"> Synonymer
                 </a>
             </div>
         </div>
@@ -86,21 +90,20 @@
         <span>Velg tema:</span>
         <select id="themeSelect" onchange="changeTheme(this.value)">
             <option value="standard">Standard</option>
-            <option value="dinosaur">Dinosaurer</option>
-            <option value="eurovisjon">Eurovisjon</option>
-            <option value="fest">Fest</option>
-            <option value="halloween">Halloween</option>
-            <option value="host">Høst</option>
-            <option value="jul">Jul</option>
-            <option value="kryp">Småkryp</option>
-            <option value="naturfag">Naturfag</option>
-            <option value="racerbil">Racerbil</option>
-            <option value="sjorover">Sjørøver</option>
-            <option value="sommer">Sommer</option>
-            <option value="sommerfugl">Sommerfugl</option>
-            <option value="sport">Sport</option>
-            <option value="verdensrommet">Verdensrommet</option>
-            <option value="vinter">Vinter</option>
+            <option value="dinosaur">🦖 Dinosaurer</option>
+            <option value="fest">🎈 Fest</option>
+            <option value="halloween">🎃 Halloween</option>
+            <option value="host">🍂 Høst</option>
+            <option value="jul">🎄 Jul</option>
+            <option value="kryp">🐞 Småkryp</option>
+            <option value="naturfag">🧪 Naturfag</option>
+            <option value="racerbil">🏎️ Racerbil</option>
+            <option value="sjorover">🏴‍☠️Sjørøver</option>
+            <option value="sommer">🌸 Sommer</option>
+            <option value="sommerfugl">🦋 Sommerfugl</option>
+            <option value="sport">⚽️ Sport</option>
+            <option value="verdensrommet">🚀 Verdensrommet</option>
+            <option value="vinter">❄️ Vinter</option>
         </select>
     </div>
 
@@ -138,7 +141,7 @@
 <div class="main-content">
     <!-- START-SKJERM (Plassholderbilde som vises ved oppstart) -->
     <div id="placeholder-image" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
-        <img src="synonym.png" alt="Velkomstbilde" style="max-width: 400px; opacity: 0.3; filter: grayscale(100%);">
+        <img src="ikon/synonym.png" alt="Velkomstbilde" style="max-width: 400px; opacity: 0.3; filter: grayscale(100%);">
     </div>
 
     <!-- OPPGAVEARK (Skjult ved oppstart) -->
