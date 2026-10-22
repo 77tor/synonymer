@@ -1,9 +1,19 @@
 let gjeldendeOppgaver = [];
 
-// Sjekker antall genererte oppgaver og skjuler bunnbildet dersom det overstiger grensen
+// Sjekker antall genererte oppgaver og skjuler bunnbildet dersom det overstiger grensen eller ved standard/utentema
 function oppdaterBildeSynlighet() {
     const img3 = document.getElementById('ark-bilde-3');
     if (!img3) return;
+
+    // Sjekker valgt tema først
+    const themeSelect = document.getElementById('themeSelect');
+    const tema = themeSelect ? themeSelect.value : '';
+
+    // Skjuler alltid dersom "Standard" eller "Uten tema" er valgt
+    if (!tema || tema === 'standard' || tema === 'utentema') {
+        img3.style.display = 'none';
+        return;
+    }
 
     const modusEl = document.getElementById('select-modus');
     if (!modusEl) return;
@@ -48,6 +58,7 @@ function justerMaksAntall() {
     }
 }
 
+
 // Endre tema og oppdater tema-bildene i hjørnene
 function changeTheme(themeName) {
     document.body.className = document.body.className.replace(/\btheme-\S+/g, '');
@@ -58,8 +69,8 @@ function changeTheme(themeName) {
     const img3 = document.getElementById('ark-bilde-3');
 
     if (img1 && img2 && img3) {
-        // Hvis "Standard" er valgt, eller tema mangler bilder: Skjul bildene helt
-        if (!themeName || themeName === 'standard') {
+        // Hvis "Standard" eller "Uten tema" er valgt, skjul bildene helt
+        if (!themeName || themeName === 'standard' || themeName === 'utentema') {
             img1.style.display = 'none';
             img2.style.display = 'none';
             img3.style.display = 'none';
